@@ -1,0 +1,46 @@
+/* --- FOOTER --- */
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    background: linear-gradient(180deg, #ffffff 0%, #fef9c3 100%);
+    border-top: 1px solid rgba(234, 179, 8, 0.3);
+    box-shadow: 0 -6px 20px rgba(186, 140, 28, 0.1);
+    color: #1a1a1a;
+    font-size: 0.95rem;
+    letter-spacing: 0.4px;
+}
+
+/* Footer links */
+.footer a {
+    color: #b7791f;
+    font-weight: 600;
+    padding: 0 0.25rem;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+.footer a:hover {
+    color: #ca8a04;
+    text-shadow: 0 0 10px rgba(202, 138, 4, 0.4);
+}
+
+/* Footer icon (❤️ pulse) */
+.footer-icon {
+    color: #e11d48;
+    margin: 0 0.25rem;
+    animation: pulse 1.5s infinite;
+    text-shadow: 0 0 8px rgba(225, 29, 72, 0.35);
+}
+
+/* Pulse animation */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 0.8;
+    }
+}
