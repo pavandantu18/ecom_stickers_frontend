@@ -4,11 +4,12 @@ import ProductListing from './ProductListing'
 // import products from './data/products'
 import apiClient from '../api/apiClient'
 
-
 const Home = () => {
   const [products,setProducts] = useState([])
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [value,setValue] = useState("")
 
   useEffect(() => {
     fetchProducts()
