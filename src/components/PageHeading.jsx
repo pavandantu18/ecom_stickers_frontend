@@ -1,13 +1,12 @@
-import React from 'react'
-import PageTitle from './PageTitle'
+import PageTitle from "./PageTitle";
 
-const PageHeading = (props) => {
+export default function PageHeading({ title, children }) {
   return (
-    <div className='page-heading-container'>
-    <PageTitle title={props.title} />
-    {props.children}
+    <div className="max-w-[576px] mx-auto text-center py-8">
+      <PageTitle title={title} />
+      <p className="mt-4 text-lg text-text-muted dark:text-gray-400 font-primary">
+        {children}
+      </p>
     </div>
-  )
+  );
 }
-
-export default PageHeading

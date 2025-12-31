@@ -1,20 +1,18 @@
-import React from 'react'
-
-const SearchBox = ({label,placeholder,value,handleSearch}) => {
-
+export default function SearchBox({ label, placeholder, value, handleSearch }) {
   return (
-    <div className='flex items-center gap-3 pl-4 flex-1'>
-        <label className='text-lg font-semibold text-[#b7791f]'>
-            {label}
-        </label>
-        <input type="text" 
-        className='px-4 py-2 text-base border rounded-md transition border-[#b7791f] focus:ring focus:ring-dark focus:outline-none text-gray-800'
-        placeholder={placeholder}
+    <div className="flex items-center gap-3 flex-1 font-primary">
+      <label className="text-lg font-semibold text-primary dark:text-accent">
+        {label}
+      </label>
+      <input
+        type="text"
         value={value}
-        onChange={(event) => handleSearch(event.target.value)}
-        />
+        onChange={(e) => handleSearch(e.target.value)}
+        placeholder={placeholder}
+        className="w-full px-4 py-2 rounded-lg border border-border dark:border-darkborder 
+        bg-white dark:bg-darkcard text-text dark:text-light
+        focus:ring-2 focus:ring-primary outline-none transition"
+      />
     </div>
-  )
+  );
 }
-
-export default SearchBox

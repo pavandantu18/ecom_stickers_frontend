@@ -1,19 +1,20 @@
-import React from 'react'
-
-const Dropdown = ({label,options,selectedValue, handleSort}) => {
+export default function Dropdown({ label, options, selectedValue, handleSort }) {
   return (
-    <div className='flex items-center gap-2 justify-end pr-12 flex-1 font-primary'>
-        <label className='text-lg font-semibold text-[#b7791f]'>{label}</label>
-        <select className='px-3 py-2 text-base border rounded-md transition border-primary focus:ring focus:ring-dark focus:outline-none text-gray-900'
+    <div className="flex items-center gap-3 font-primary">
+      <label className="text-lg font-semibold text-primary dark:text-accent">
+        {label}
+      </label>
+      <select
         value={selectedValue}
-        onChange={(event) => handleSort(event.target.value)}
-        >
-            {options.map((optionVal,index) => (
-                <option key={index} value={optionVal}>{optionVal}</option>
-            ))}
-        </select>
+        onChange={(e) => handleSort(e.target.value)}
+        className="px-4 py-2 rounded-lg border border-border dark:border-darkborder
+        bg-white dark:bg-darkcard text-text dark:text-light
+        focus:ring-2 focus:ring-primary transition"
+      >
+        {options.map((opt) => (
+          <option key={opt}>{opt}</option>
+        ))}
+      </select>
     </div>
-  )
+  );
 }
-
-export default Dropdown

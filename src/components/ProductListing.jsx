@@ -1,64 +1,43 @@
-import React, { useState,useMemo } from 'react'
+import { useState, useMemo } from "react";
 import ProductCard from "./ProductCard";
-import SearchBox from './SearchBox';
-import Dropdown from './Dropdown';
+import SearchBox from "./SearchBox";
+import Dropdown from "./Dropdown";
 
 const sortList = ["Popularity", "Price Low to High", "Price High to Low"];
 
-const ProductListing = ({products}) => {
-  let [searchText,setSearchText] = useState("")
-  let [selectedSort, setSelectedSort] = useState("Popularity");
+export default function ProductListings({ products }) {
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("Popularity");
 
-  const filteredAndSortedProducts = useMemo(() => {
-    if (!Array.isArray(products)) {
-      return [];
-    }
-
-    let filteredProducts = products.filter(
-      (product) =>
-        product.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchText.toLowerCase())
-    );
-
-    return filteredProducts.slice().sort((a, b) => {
-      switch (selectedSort) {
-        case "Price Low to High":
-          return parseFloat(a.price) - parseFloat(b.price);
-        case "Price High to Low":
-          return parseFloat(b.price) - parseFloat(a.price);
-        case "Popularity":
-        default:
-          return parseInt(b.popularity) - parseInt(a.popularity);
-      }
-    });
-  }, [products, searchText, selectedSort]);
-  
-  function handleSearchChange(inputSearch) {
-    setSearchText(inputSearch)
-    // console.log(searchText)
-  }
-
-  function handleSortChange(sortType) {
-    setSelectedSort(sortType)
-  }
+  const filtered = useMemo(() => {
+    return products
+      .filter(p =>
+        p.name.toLowerCase().includes(search.toLowerCase()) ||
+        p.description.toLowerCase().includes(search.toLowerCase())
+      )
+      .sort((a, b) =>
+        sort === "Price Low to High"
+          ? a.price - b.price
+          : sort === "Price High to Low"
+          ? b.price - a.price
+          : b.popularity - a.popularity
+      );
+  }, [products, search, sort]);
 
   return (
-    <div className='product-listings-container'>
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-12">
-        <SearchBox label="Search" placeholder="Search products..." value={searchText} handleSearch={(value) => handleSearchChange(value)} />
-        <Dropdown label="Sort by" options={sortList} value={selectedSort} handleSort={(value) => handleSortChange(value)} />
+    <>
+      <div className="flex flex-col sm:flex-row gap-6 justify-between mt-12">
+        <SearchBox label="Search" placeholder="Search products..." value={search} handleSearch={setSearch} />
+        <Dropdown label="Sort by" options={sortList} selectedValue={sort} handleSort={setSort} />
       </div>
-        <div className="product-listings-grid">
-            {filteredAndSortedProducts.length > 0 ? (
-          filteredAndSortedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))
-        ) : (
-          <p className="product-listings-empty">No products found</p>
-        )}
-        </div>
-    </div>
-  )
-}
 
-export default ProductListing
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 py-12">
+        {filtered.length ? filtered.map(p => (
+          <ProductCard key={p.productId} product={p} />
+        )) : (
+          <p className="text-center font-bold text-primary">No products found</p>
+        )}
+      </div>
+    </>
+  );
+}

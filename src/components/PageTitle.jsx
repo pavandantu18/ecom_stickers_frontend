@@ -1,9 +1,8 @@
-import React from 'react'
-
-const PageTitle = ({title}) => {
+export default function PageTitle({ title }) {
   return (
-    <h1 className='page-title'>{title}</h1>
-  )
+    <h1 className="text-3xl font-extrabold text-center
+      bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+      {title}
+    </h1>
+  );
 }
-
-export default PageTitle
